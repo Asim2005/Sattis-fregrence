@@ -1,0 +1,1 @@
+var e=e=>e?e.startsWith(`http`)?e:``+e:``;export{e as t};

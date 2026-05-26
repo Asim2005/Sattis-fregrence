@@ -1,0 +1,74 @@
+import { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+
+export default function FAQPage() {
+  const [openIndex, setOpenIndex] = useState(null);
+
+  const faqs = [
+    {
+      q: 'How long do SATTIS fragrances last?',
+      a: 'All our fragrances are composed at Extrait de Parfum or High-Concentration Eau de Parfum concentrations, offering an exceptional wear time of 8 to 12 hours depending on skin chemistry and scent profiles.'
+    },
+    {
+      q: 'Are your fragrances unisex?',
+      a: 'Yes, perfume has no gender! While we categorize fragrances under Men, Women, and Unisex collections to guide your choices, we encourage you to wear whatever speaks to your personal style and mood.'
+    },
+    {
+      q: 'What is your shipping policy?',
+      a: 'We offer free delivery across Pakistan for orders above Rs. 3,000. For orders below this threshold, a flat shipping fee is calculated at checkout based on your delivery selection.'
+    },
+    {
+      q: 'Can I exchange or return my perfume?',
+      a: 'Due to the cosmetic nature of fragrances, we can only accept returns or exchanges for unused, factory-sealed products in their original packaging within 7 days of delivery.'
+    },
+    {
+      q: 'Are SATTIS products cruelty-free?',
+      a: 'Absolutely. We do not test any of our final formulations or raw ingredients on animals, and we partner only with ethical, cruelty-free suppliers.'
+    }
+  ];
+
+  return (
+    <div className="pt-24 min-h-screen bg-white">
+      <div className="bg-[#0a0a0a] text-white py-24 text-center">
+        <div className="max-w-3xl mx-auto px-4">
+          <span className="text-xs font-bold uppercase tracking-[0.3em] text-gray-400 block mb-3">Help Center</span>
+          <h1 className="font-serif text-4xl md:text-5xl tracking-wide">Frequently Asked Questions</h1>
+        </div>
+      </div>
+
+      <div className="max-w-3xl mx-auto px-4 py-20">
+        <div className="space-y-4">
+          {faqs.map((faq, idx) => {
+            const isOpen = openIndex === idx;
+            return (
+              <div key={idx} className="border-b border-gray-100 pb-4">
+                <button
+                  onClick={() => setOpenIndex(isOpen ? null : idx)}
+                  className="w-full flex items-center justify-between text-left py-4 hover:opacity-75 transition-opacity"
+                >
+                  <span className="font-serif text-lg text-black">{faq.q}</span>
+                  <span className="text-xl font-light">{isOpen ? '−' : '+'}</span>
+                </button>
+                <AnimatePresence initial={false}>
+                  {isOpen && (
+                    <motion.div
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: 'auto', opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: 0.2 }}
+                      className="overflow-hidden"
+                    >
+                      <p className="text-sm text-gray-500 leading-relaxed pb-4 pt-2">
+                        {faq.a}
+                      </p>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    </div>
+  );
+}

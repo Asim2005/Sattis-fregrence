@@ -1,0 +1,12 @@
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteBase /
+
+    # 1. Route API requests from /api/... to /backend/...
+    RewriteRule ^api/(.*)$ backend/$1 [L,QSA]
+
+    # 2. Support React Router Single Page Application (SPA) routing
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule ^ index.html [L]
+</IfModule>
