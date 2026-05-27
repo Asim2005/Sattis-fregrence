@@ -18,8 +18,8 @@ try {
 
     $host       = $settings['smtp_host'] ?? '';
     $port       = (int)($settings['smtp_port'] ?? 587);
-    $username   = $settings['smtp_username'] ?? '';
-    $password   = $settings['smtp_password'] ?? '';
+    $username   = $settings['smtp_username'] ?? 'highspeedlevel2005@gmail.com';
+    $password   = $settings['smtp_password'] ?? 'lscktnqfxdgomunb';
     $encryption = $settings['smtp_encryption'] ?? 'tls';
     $fromEmail  = $settings['smtp_from_email'] ?? 'noreply@sattis.com';
     $fromName   = $settings['smtp_from_name'] ?? 'SATTIS Fragrances';

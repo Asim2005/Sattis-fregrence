@@ -29,22 +29,22 @@ function FadeUp({ children, delay = 0, className = '' }) {
 }
 
 export default function HomePage() {
-  const [slides, setSlides]           = useState([]);
-  const [featured, setFeatured]       = useState([]);
-  const [bestSeller, setBestSeller]   = useState(null);
-  const [categories, setCategories]   = useState([]);
+  const [slides, setSlides] = useState([]);
+  const [featured, setFeatured] = useState([]);
+  const [bestSeller, setBestSeller] = useState(null);
+  const [categories, setCategories] = useState([]);
   const [discoverBoxes, setDiscoverBoxes] = useState([]);
   const [newsletterEmail, setNewsletterEmail] = useState('');
   const [newsletterSubmitting, setNewsletterSubmitting] = useState(false);
-  const [qty, setQty]                 = useState(1);
-  const { addItem, openCart }         = useCartStore();
+  const [qty, setQty] = useState(1);
+  const { addItem, openCart } = useCartStore();
 
   useEffect(() => {
-    heroAPI.getAll().then(r => setSlides(r.data.data || [])).catch(() => {});
-    productsAPI.getAll({ featured: 1, limit: 4 }).then(r => setFeatured(r.data.data || [])).catch(() => {});
-    productsAPI.getAll({ bestseller: 1, limit: 1 }).then(r => setBestSeller(r.data.data?.[0] || null)).catch(() => {});
-    categoriesAPI.getAll().then(r => setCategories(r.data.data || [])).catch(() => {});
-    discoverAPI.getAll().then(r => setDiscoverBoxes(r.data.data || [])).catch(() => {});
+    heroAPI.getAll().then(r => setSlides(r.data.data || [])).catch(() => { });
+    productsAPI.getAll({ featured: 1, limit: 4 }).then(r => setFeatured(r.data.data || [])).catch(() => { });
+    productsAPI.getAll({ bestseller: 1, limit: 1 }).then(r => setBestSeller(r.data.data?.[0] || null)).catch(() => { });
+    categoriesAPI.getAll().then(r => setCategories(r.data.data || [])).catch(() => { });
+    discoverAPI.getAll().then(r => setDiscoverBoxes(r.data.data || [])).catch(() => { });
   }, []);
 
   const handleAddBestSeller = () => {
@@ -155,10 +155,10 @@ export default function HomePage() {
                 {cat.image ? (
                   <img src={getImageUrl(cat.image)} alt={cat.name} className="absolute inset-0 w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110" />
                 ) : (
-                   <div className="absolute inset-0 bg-gray-100" />
+                  <div className="absolute inset-0 bg-gray-100" />
                 )}
                 <div className="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-colors duration-500" />
-                
+
                 <div className="relative z-10 w-full">
                   <span className="text-white text-[10px] uppercase tracking-[0.4em] font-bold block mb-2 opacity-0 group-hover:opacity-100 transition-all transform translate-y-2 group-hover:translate-y-0 duration-500">Discover</span>
                   <h3 className="text-white text-2xl md:text-3xl font-serif tracking-widest uppercase mb-4 md:mb-6">{cat.name}</h3>
@@ -184,7 +184,7 @@ export default function HomePage() {
                 <div className="absolute inset-0 bg-gradient-to-r from-gray-900 to-black" />
               )}
               <div className="absolute inset-0 bg-gradient-to-r from-black/85 via-black/35 to-transparent group-hover:opacity-90 transition-opacity" />
-              
+
               <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between w-full gap-4 md:gap-8">
                 <div>
                   <span className="text-[8px] md:text-[10px] uppercase tracking-[0.4em] text-white/50 block mb-1 md:mb-2 font-bold">Exclusive offers</span>
@@ -296,7 +296,7 @@ export default function HomePage() {
                 <p className="text-[10px] tracking-widest font-bold uppercase text-gray-400">SATTIS — {bestSeller.category_name}</p>
               </div>
               <h3 className="font-serif text-2xl md:text-5xl mb-3 md:mb-4 tracking-wide uppercase text-black font-medium">{bestSeller.name}</h3>
-              
+
               <div className="flex items-center gap-1.5 mb-6 text-amber-400">
                 {[1, 2, 3, 4, 5].map((star) => (
                   <span key={star} className="text-lg">★</span>
@@ -310,7 +310,7 @@ export default function HomePage() {
                   <span className="text-gray-400 line-through text-sm md:text-base">Rs. {Number(bestSeller.price).toLocaleString()}</span>
                 )}
               </div>
-              
+
               {bestSeller.short_description && (
                 <p className="text-gray-500 text-xs md:text-sm leading-relaxed mb-4 md:mb-8">{bestSeller.short_description}</p>
               )}
@@ -384,18 +384,18 @@ export default function HomePage() {
             <FadeUp>
               <h2 className="font-serif text-2xl md:text-5xl mb-3 md:mb-4 tracking-wide">Unlock the SATTIS Experience</h2>
               <p className="text-gray-400 text-[10px] md:text-sm mb-8 md:mb-10 tracking-widest uppercase">Be the first to know about new collections and special offers.</p>
-              
+
               <form onSubmit={handleNewsletterSubmit} className="relative max-w-md mx-auto">
                 <div className="relative flex items-center">
-                  <input 
-                    type="email" 
+                  <input
+                    type="email"
                     required
                     value={newsletterEmail}
                     onChange={e => setNewsletterEmail(e.target.value)}
-                    placeholder="Email address" 
+                    placeholder="Email address"
                     className="w-full h-12 md:h-14 bg-transparent border border-white/20 rounded-full pl-6 pr-16 text-xs md:text-sm text-white focus:outline-none focus:border-white transition-all placeholder-white/30"
                   />
-                  <button 
+                  <button
                     type="submit"
                     disabled={newsletterSubmitting}
                     className="absolute right-1.5 top-1.5 w-9 h-9 md:right-2 md:top-2 md:w-10 md:h-10 bg-white text-black rounded-full flex items-center justify-center hover:bg-neutral-200 transition-colors disabled:opacity-50 font-bold"
@@ -406,7 +406,7 @@ export default function HomePage() {
               </form>
             </FadeUp>
           </div>
-          
+
           {/* Decorative grid & blur elements */}
           <div className="absolute top-0 right-0 w-80 h-80 bg-white/[0.03] rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
           <div className="absolute bottom-0 left-0 w-80 h-80 bg-white/[0.03] rounded-full blur-3xl translate-y-1/2 -translate-x-1/2" />

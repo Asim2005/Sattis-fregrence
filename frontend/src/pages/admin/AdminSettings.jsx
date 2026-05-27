@@ -28,6 +28,8 @@ export default function AdminSettings() {
   });
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
+  const [testEmail, setTestEmail] = useState('');
+  const [testing, setTesting] = useState(false);
 
   useEffect(() => {
     settingsAPI.getAll()
@@ -41,6 +43,19 @@ export default function AdminSettings() {
       .catch(() => {})
       .finally(() => setLoading(false));
   }, []);
+
+  const handleTestSmtp = async () => {
+    if (!testEmail) return toast.error('Enter a recipient email to test.');
+    setTesting(true);
+    try {
+      await settingsAPI.testSmtp(testEmail);
+      toast.success(`Test email sent to ${testEmail}. Check your inbox!`);
+    } catch (err) {
+      toast.error(err?.response?.data?.message || 'SMTP test failed. Check credentials and server error log.');
+    } finally {
+      setTesting(false);
+    }
+  };
 
   const handleSave = async (e) => {
     e.preventDefault();
@@ -139,6 +154,29 @@ export default function AdminSettings() {
               <input value={settings.admin_notify_email} onChange={e => setSettings({...settings, admin_notify_email: e.target.value})} placeholder="admin@sattis.com" className="w-full h-12 px-4 rounded-xl border border-gray-100 bg-gray-50 outline-none text-sm focus:border-black focus:bg-white transition-all" />
             </div>
           </div>
+        </div>
+
+        {/* Test SMTP */}
+        <div className="bg-gray-50 rounded-2xl p-5 flex flex-col sm:flex-row items-start sm:items-end gap-4">
+          <div className="flex-1">
+            <label className="text-[10px] uppercase tracking-widest font-bold text-gray-500 mb-2 block">Send Test Email</label>
+            <input
+              type="email"
+              value={testEmail}
+              onChange={e => setTestEmail(e.target.value)}
+              placeholder="your@email.com"
+              className="w-full h-12 px-4 rounded-xl border border-gray-200 bg-white outline-none text-sm focus:border-black transition-all"
+            />
+            <p className="text-[10px] text-gray-400 mt-1">Save your SMTP settings first, then send a test to verify the connection works.</p>
+          </div>
+          <button
+            type="button"
+            onClick={handleTestSmtp}
+            disabled={testing}
+            className="h-12 px-8 bg-gray-800 text-white rounded-xl text-sm font-bold uppercase tracking-widest hover:bg-black transition-colors disabled:opacity-50 whitespace-nowrap"
+          >
+            {testing ? 'Sending…' : 'Send Test Email'}
+          </button>
         </div>
 
         {/* Social Media Links */}

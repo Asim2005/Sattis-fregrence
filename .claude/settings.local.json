@@ -1,0 +1,26 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(curl *)",
+      "PowerShell(& \"C:\\\\xampp\\\\mysql\\\\bin\\\\mysql.exe\" -u root -e \"SHOW DATABASES;\")",
+      "PowerShell(& \"C:\\\\xampp\\\\mysql\\\\bin\\\\mysql.exe\" -u root -D satish_db -e \"SELECT id, name, email, role FROM users LIMIT 5;\")",
+      "PowerShell(& \"C:\\\\xampp\\\\mysql\\\\bin\\\\mysql.exe\" -u root -D satish_db -e \"SELECT password FROM users WHERE email='admin@satish.com';\")",
+      "PowerShell(& \"C:\\\\xampp\\\\php\\\\php.exe\" -r \"var_dump\\(password_verify\\('password', '\\\\$2y\\\\$12\\\\$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi'\\)\\);\")",
+      "PowerShell(& \"C:\\\\xampp\\\\php\\\\php.exe\" -r \"var_dump\\(password_verify\\('admin123', '\\\\$2y\\\\$12\\\\$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi'\\)\\); var_dump\\(password_verify\\('secret', '\\\\$2y\\\\$12\\\\$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi'\\)\\);\")",
+      "PowerShell(& \"C:\\\\xampp\\\\php\\\\php.exe\" -r \"echo password_hash\\('admin123', PASSWORD_BCRYPT\\);\")",
+      "PowerShell(& \"C:\\\\xampp\\\\mysql\\\\bin\\\\mysql.exe\" -u root -D satish_db -e \"UPDATE users SET password='\\\\$2y\\\\$10\\\\$buVWrEmXzqmkWmBA5nBg0et0o81HCSifJaul1y6klPjGRYS.fxh9S' WHERE email='admin@satish.com';\")",
+      "PowerShell(& \"C:\\\\xampp\\\\mysql\\\\bin\\\\mysql.exe\" -u root -D satish_db -e \"SELECT email, LEFT\\(password,20\\) as pass_prefix FROM users WHERE email='admin@satish.com';\")",
+      "PowerShell(& \"C:\\\\xampp\\\\mysql\\\\bin\\\\mysql.exe\" -u root -D satish_db -e \"DESCRIBE reviews;\")",
+      "PowerShell(& \"C:\\\\xampp\\\\mysql\\\\bin\\\\mysql.exe\" -u root -D satish_db -e \"ALTER TABLE reviews ADD COLUMN images JSON DEFAULT NULL AFTER body;\")",
+      "PowerShell(& \"C:\\\\xampp\\\\mysql\\\\bin\\\\mysql.exe\" -u root -D satish_db -e \"SHOW TABLES; SELECT '---ORDERS---'; DESCRIBE orders; SELECT '---PRODUCTS---'; DESCRIBE products; SELECT '---COUPONS---'; DESCRIBE coupons; SELECT '---DISCOVER---'; DESCRIBE discover_boxes;\" 2>&1)",
+      "PowerShell(& \"C:\\\\xampp\\\\mysql\\\\bin\\\\mysql.exe\" -u root -D satish_db -e \"DESCRIBE orders; SELECT '---'; DESCRIBE coupons; SELECT '---'; DESCRIBE discover_boxes;\")",
+      "PowerShell(& \"C:\\\\xampp\\\\mysql\\\\bin\\\\mysql.exe\" -u root -D satish_db -e \"SELECT setting_key, setting_value FROM site_settings WHERE setting_key LIKE '%smtp%' OR setting_key LIKE '%mail%' OR setting_key LIKE '%email%';\")",
+      "PowerShell(& \"C:\\\\xampp\\\\mysql\\\\bin\\\\mysql.exe\" -u root -D satish_db -e \"SELECT id, code, expiry_date, is_active, used_count, usage_limit FROM coupons;\")",
+      "PowerShell(& \"C:\\\\xampp\\\\mysql\\\\bin\\\\mysql.exe\" -u root -D satish_db -e \"INSERT INTO coupons \\(code, discount_type, discount_value, usage_limit, expiry_date, is_active\\) VALUES \\('NODATECOUPON','percentage',10,0,'',1\\);\" 2>&1)",
+      "PowerShell(& \"C:\\\\xampp\\\\mysql\\\\bin\\\\mysql.exe\" -u root -D satish_db -e \"SELECT id, code, expiry_date, ISNULL\\(expiry_date\\) as is_null FROM coupons WHERE code='NODATECOUPON';\")",
+      "PowerShell(& \"C:\\\\xampp\\\\mysql\\\\bin\\\\mysql.exe\" -u root -D satish_db -e \"UPDATE coupons SET expiry_date = NULL WHERE expiry_date = '0000-00-00'; SELECT id, code, expiry_date FROM coupons;\")",
+      "Bash(npm run *)",
+      "PowerShell(head *)"
+    ]
+  }
+}

@@ -1,0 +1,6 @@
+# Environment credentials — never commit
+backend/config/env.php
+
+# Frontend build output
+frontend/dist
+frontend/node_modules

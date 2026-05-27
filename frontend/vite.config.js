@@ -12,7 +12,7 @@ export default defineConfig({
       '/api': {
         target: 'http://localhost',
         changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/api/, '/satish/satish/backend'),
+        rewrite: (path) => path.replace(/^\/api/, '/Sattis-fregrence/backend'),
       },
     },
   },

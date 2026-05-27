@@ -77,8 +77,9 @@ export const heroAPI = {
 
 // ── Settings ─────────────────────────────────────────────
 export const settingsAPI = {
-  getAll:  ()     => api.get('/settings'),
-  update:  (data) => api.post('/settings', data),
+  getAll:    ()         => api.get('/settings'),
+  update:    (data)     => api.post('/settings', data),
+  testSmtp:  (to)       => api.post('/settings/test-smtp', { to }),
 };
 
 // ── Analytics ────────────────────────────────────────────
