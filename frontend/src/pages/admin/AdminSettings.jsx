@@ -1,12 +1,12 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { settingsAPI } from '../../services/api';
+import { settingsAPI, uploadAPI } from '../../services/api';
 import toast from 'react-hot-toast';
 
 export default function AdminSettings() {
   const [settings, setSettings] = useState({
     site_name: 'SATTIS',
-    support_email: 'support@satish.com',
+    support_email: 'support@sattis.com',
     phone_number: '+92 000 0000000',
     address: 'Karachi, Pakistan',
     currency: 'Rs.',
@@ -25,11 +25,31 @@ export default function AdminSettings() {
     social_instagram: '',
     social_whatsapp: '',
     social_tiktok: '',
+    social_facebook_icon: '',
+    social_instagram_icon: '',
+    social_whatsapp_icon: '',
+    social_tiktok_icon: '',
   });
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [testEmail, setTestEmail] = useState('');
   const [testing, setTesting] = useState(false);
+  const [uploadingIcon, setUploadingIcon] = useState(null);
+
+  const handleIconUpload = async (key, file) => {
+    if (!file) return;
+    setUploadingIcon(key);
+    try {
+      const res = await uploadAPI.upload(file);
+      const url = res.data.data.url;
+      setSettings(prev => ({ ...prev, [key]: url }));
+      toast.success('Icon uploaded! Click Save Settings to apply.');
+    } catch {
+      toast.error('Icon upload failed.');
+    } finally {
+      setUploadingIcon(null);
+    }
+  };
 
   useEffect(() => {
     settingsAPI.getAll()
@@ -183,22 +203,51 @@ export default function AdminSettings() {
         <div className="border-t border-gray-100 pt-6">
           <h3 className="text-xs font-bold uppercase tracking-[0.2em] text-gray-400 border-b pb-2 mb-4">Social Media Links</h3>
           <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-            <div>
-              <label className="text-[10px] uppercase tracking-widest font-bold text-gray-500 mb-2 block">WhatsApp Link/Number</label>
-              <input value={settings.social_whatsapp || ''} onChange={e => setSettings({...settings, social_whatsapp: e.target.value})} placeholder="e.g. +923000000000" className="w-full h-12 px-4 rounded-xl border border-gray-100 bg-gray-50 outline-none text-sm focus:border-black focus:bg-white transition-all" />
-            </div>
-            <div>
-              <label className="text-[10px] uppercase tracking-widest font-bold text-gray-500 mb-2 block">Instagram Profile URL</label>
-              <input value={settings.social_instagram || ''} onChange={e => setSettings({...settings, social_instagram: e.target.value})} placeholder="https://instagram.com/sattis" className="w-full h-12 px-4 rounded-xl border border-gray-100 bg-gray-50 outline-none text-sm focus:border-black focus:bg-white transition-all" />
-            </div>
-            <div>
-              <label className="text-[10px] uppercase tracking-widest font-bold text-gray-500 mb-2 block">Facebook Profile URL</label>
-              <input value={settings.social_facebook || ''} onChange={e => setSettings({...settings, social_facebook: e.target.value})} placeholder="https://facebook.com/sattis" className="w-full h-12 px-4 rounded-xl border border-gray-100 bg-gray-50 outline-none text-sm focus:border-black focus:bg-white transition-all" />
-            </div>
-            <div>
-              <label className="text-[10px] uppercase tracking-widest font-bold text-gray-500 mb-2 block">TikTok Profile URL</label>
-              <input value={settings.social_tiktok || ''} onChange={e => setSettings({...settings, social_tiktok: e.target.value})} placeholder="https://tiktok.com/@sattis" className="w-full h-12 px-4 rounded-xl border border-gray-100 bg-gray-50 outline-none text-sm focus:border-black focus:bg-white transition-all" />
-            </div>
+            {[
+              { label: 'WhatsApp Link/Number', urlKey: 'social_whatsapp', iconKey: 'social_whatsapp_icon', placeholder: 'e.g. +923000000000' },
+              { label: 'Instagram Profile URL', urlKey: 'social_instagram', iconKey: 'social_instagram_icon', placeholder: 'https://instagram.com/sattis' },
+              { label: 'Facebook Profile URL', urlKey: 'social_facebook', iconKey: 'social_facebook_icon', placeholder: 'https://facebook.com/sattis' },
+              { label: 'TikTok Profile URL', urlKey: 'social_tiktok', iconKey: 'social_tiktok_icon', placeholder: 'https://tiktok.com/@sattis' },
+            ].map(({ label, urlKey, iconKey, placeholder }) => (
+              <div key={urlKey}>
+                <label className="text-[10px] uppercase tracking-widest font-bold text-gray-500 mb-2 block">{label}</label>
+                <input
+                  value={settings[urlKey] || ''}
+                  onChange={e => setSettings({ ...settings, [urlKey]: e.target.value })}
+                  placeholder={placeholder}
+                  className="w-full h-12 px-4 rounded-xl border border-gray-100 bg-gray-50 outline-none text-sm focus:border-black focus:bg-white transition-all"
+                />
+                {/* Icon upload */}
+                <div className="mt-2 flex items-center gap-2">
+                  {settings[iconKey] ? (
+                    <img src={settings[iconKey]} alt="icon" className="w-8 h-8 rounded object-contain bg-gray-100 border border-gray-200" />
+                  ) : (
+                    <div className="w-8 h-8 rounded border border-dashed border-gray-300 bg-gray-50 flex items-center justify-center text-gray-300 text-[9px] leading-tight text-center">icon</div>
+                  )}
+                  <label className="cursor-pointer">
+                    <span className="text-[10px] text-gray-500 bg-gray-100 px-2 py-1 rounded hover:bg-gray-200 transition-colors whitespace-nowrap">
+                      {uploadingIcon === iconKey ? 'Uploading…' : 'Upload Icon'}
+                    </span>
+                    <input
+                      type="file"
+                      accept="image/*"
+                      className="hidden"
+                      disabled={uploadingIcon === iconKey}
+                      onChange={e => handleIconUpload(iconKey, e.target.files[0])}
+                    />
+                  </label>
+                  {settings[iconKey] && (
+                    <button
+                      type="button"
+                      onClick={() => setSettings(prev => ({ ...prev, [iconKey]: '' }))}
+                      className="text-[10px] text-red-400 hover:text-red-600 transition-colors"
+                    >
+                      Remove
+                    </button>
+                  )}
+                </div>
+              </div>
+            ))}
           </div>
         </div>
 

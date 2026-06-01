@@ -8,6 +8,7 @@ import 'swiper/css/pagination';
 import 'swiper/css/effect-fade';
 // import { ArrowRight, Minus, Plus, ShoppingBag } from 'lucide-react';
 import { heroAPI, productsAPI, categoriesAPI, discoverAPI, newsletterAPI } from '../services/api';
+import useSEO from '../hooks/useSEO';
 import { getImageUrl } from '../utils/image';
 import ProductCard from '../components/ProductCard';
 import useCartStore from '../stores/cartStore';
@@ -29,6 +30,10 @@ function FadeUp({ children, delay = 0, className = '' }) {
 }
 
 export default function HomePage() {
+  useSEO({
+    description: "Discover Sattis — Pakistan's premier luxury fragrance store. Shop exclusive Men, Women & Unisex perfumes online with Cash on Delivery and EasyPaisa.",
+  });
+
   const [slides, setSlides] = useState([]);
   const [featured, setFeatured] = useState([]);
   const [bestSeller, setBestSeller] = useState(null);

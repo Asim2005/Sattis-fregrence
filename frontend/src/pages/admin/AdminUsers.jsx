@@ -19,7 +19,7 @@ export default function AdminUsers() {
     } catch (err) {
       // For now, let's just use mock data if the endpoint isn't fully ready
       setUsers([
-        { id: 1, name: 'Admin User', email: 'admin@satish.com', role: 'admin', created_at: '2023-01-01' },
+        { id: 1, name: 'Admin User', email: 'admin@sattis.com', role: 'admin', created_at: '2023-01-01' },
         { id: 2, name: 'Sample Customer', email: 'customer@example.com', role: 'customer', created_at: '2023-05-15' },
       ]);
     } finally {

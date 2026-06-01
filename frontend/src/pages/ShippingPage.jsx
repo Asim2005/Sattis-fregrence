@@ -1,4 +1,11 @@
+import useSEO from '../hooks/useSEO';
+
 export default function ShippingPage() {
+  useSEO({
+    title: 'Shipping Policy',
+    description: 'Find out about Sattis delivery timelines, Cash on Delivery availability, shipping fees, and order tracking across Pakistan.',
+  });
+
   return (
     <div className="pt-24 min-h-screen bg-white">
       <div className="bg-[#0a0a0a] text-white py-24 text-center">

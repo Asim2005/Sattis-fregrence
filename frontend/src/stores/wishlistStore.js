@@ -29,7 +29,7 @@ const useWishlistStore = create(
         }
       }
     }),
-    { name: 'satish-wishlist' }
+    { name: 'sattis-wishlist' }
   )
 );
 

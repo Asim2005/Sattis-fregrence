@@ -7,11 +7,27 @@ import ProductCard from '../components/ProductCard';
 import { getImageUrl } from '../utils/image';
 import useCartStore from '../stores/cartStore';
 import toast from 'react-hot-toast';
+import useSEO from '../hooks/useSEO';
 
 export default function ProductDetail() {
   const { slug } = useParams();
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
+
+  useSEO({
+    title: product?.name,
+    description: product?.short_description
+      ? `${product.short_description} — Shop ${product.name} at Sattis with Cash on Delivery across Pakistan.`
+      : product?.name
+        ? `Shop ${product.name} — a luxury fragrance from Sattis. Fast delivery with COD and EasyPaisa across Pakistan.`
+        : undefined,
+    ogImage: product?.images?.[0]?.image_path
+      ? getImageUrl(product.images[0].image_path)
+      : product?.primary_image
+        ? getImageUrl(product.primary_image)
+        : undefined,
+    ogType: 'product',
+  });
   const [qty, setQty]         = useState(1);
   const [activeImage, setActiveImage] = useState(0);
   const [openAccordions, setOpenAccordions] = useState(['details', 'notes']);

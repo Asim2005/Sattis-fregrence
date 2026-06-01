@@ -2,7 +2,9 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { productsAPI } from '../services/api';
+import useSEO from '../hooks/useSEO';
 
+// defined outside component — no hooks needed here
 const questions = [
   {
     id: 1,
@@ -37,6 +39,11 @@ const questions = [
 ];
 
 export default function ScentQuiz() {
+  useSEO({
+    title: 'Scent Quiz',
+    description: 'Take the Sattis Scent Quiz to discover your perfect fragrance. Answer a few quick questions and we\'ll match you with your signature scent.',
+  });
+
   const [step, setStep] = useState(0);
   const [answers, setAnswers] = useState([]);
   const [results, setResults] = useState([]);

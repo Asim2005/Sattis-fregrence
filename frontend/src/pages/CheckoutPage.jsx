@@ -5,10 +5,13 @@ import useCartStore, { getCartSubtotal, getCartShipping } from '../stores/cartSt
 import { ordersAPI, couponsAPI, settingsAPI } from '../services/api';
 import { getImageUrl } from '../utils/image';
 import toast from 'react-hot-toast';
+import useSEO from '../hooks/useSEO';
 
 
 
 export default function CheckoutPage() {
+  useSEO({ title: 'Checkout', noindex: true });
+
   const { items, clearCart } = useCartStore();
   const navigate = useNavigate();
 

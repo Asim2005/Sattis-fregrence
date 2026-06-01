@@ -3,8 +3,14 @@ import { Link, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import useAuthStore from '../stores/authStore';
 import toast from 'react-hot-toast';
+import useSEO from '../hooks/useSEO';
 
 export default function LoginPage() {
+  useSEO({
+    title: 'Sign In',
+    description: 'Sign in to your Sattis account to track orders, manage your wishlist, and enjoy a seamless luxury shopping experience.',
+  });
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const { login, isLoading } = useAuthStore();
@@ -15,7 +21,7 @@ export default function LoginPage() {
     const res = await login(email, password);
     if (res.success) {
       toast.success('Welcome back!');
-      if (res.user?.role === 'admin' || email === 'adminsatish@gmail.com') {
+      if (res.user?.role === 'admin' || email === 'adminsattis@gmail.com') {
         navigate('/admin');
       } else {
         navigate('/');

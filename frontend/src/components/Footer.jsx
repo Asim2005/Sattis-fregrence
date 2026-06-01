@@ -11,7 +11,11 @@ export default function Footer() {
     social_facebook: '',
     social_instagram: '',
     social_whatsapp: '',
-    social_tiktok: ''
+    social_tiktok: '',
+    social_facebook_icon: '',
+    social_instagram_icon: '',
+    social_whatsapp_icon: '',
+    social_tiktok_icon: '',
   });
 
   useEffect(() => {
@@ -22,7 +26,11 @@ export default function Footer() {
           social_facebook: data.social_facebook || '',
           social_instagram: data.social_instagram || '',
           social_whatsapp: data.social_whatsapp || '',
-          social_tiktok: data.social_tiktok || ''
+          social_tiktok: data.social_tiktok || '',
+          social_facebook_icon: data.social_facebook_icon || '',
+          social_instagram_icon: data.social_instagram_icon || '',
+          social_whatsapp_icon: data.social_whatsapp_icon || '',
+          social_tiktok_icon: data.social_tiktok_icon || '',
         });
       })
       .catch(() => {});
@@ -68,23 +76,35 @@ export default function Footer() {
               </p>
               <div className="flex items-center gap-3">
                 {socials.social_facebook && (
-                  <a href={socials.social_facebook} target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="w-9 h-9 rounded-full bg-white/10 flex items-center justify-center hover:bg-white/20 transition-colors">
-                    <span className="text-[10px] font-bold">FB</span>
+                  <a href={socials.social_facebook} target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="w-9 h-9 rounded-full bg-white/10 flex items-center justify-center hover:bg-white/20 transition-colors overflow-hidden">
+                    {socials.social_facebook_icon
+                      ? <img src={socials.social_facebook_icon} alt="Facebook" className="w-5 h-5 object-contain" />
+                      : <span className="text-[10px] font-bold">FB</span>
+                    }
                   </a>
                 )}
                 {socials.social_instagram && (
-                  <a href={socials.social_instagram} target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="w-9 h-9 rounded-full bg-white/10 flex items-center justify-center hover:bg-white/20 transition-colors">
-                    <span className="text-[10px] font-bold">IG</span>
+                  <a href={socials.social_instagram} target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="w-9 h-9 rounded-full bg-white/10 flex items-center justify-center hover:bg-white/20 transition-colors overflow-hidden">
+                    {socials.social_instagram_icon
+                      ? <img src={socials.social_instagram_icon} alt="Instagram" className="w-5 h-5 object-contain" />
+                      : <span className="text-[10px] font-bold">IG</span>
+                    }
                   </a>
                 )}
                 {socials.social_whatsapp && (
-                  <a href={socials.social_whatsapp.startsWith('http') ? socials.social_whatsapp : `https://wa.me/${socials.social_whatsapp.replace(/\+/g, '').replace(/\s/g, '')}`} target="_blank" rel="noopener noreferrer" aria-label="WhatsApp" className="w-9 h-9 rounded-full bg-white/10 flex items-center justify-center hover:bg-white/20 transition-colors">
-                    <span className="text-[10px] font-bold">WA</span>
+                  <a href={socials.social_whatsapp.startsWith('http') ? socials.social_whatsapp : `https://wa.me/${socials.social_whatsapp.replace(/\+/g, '').replace(/\s/g, '')}`} target="_blank" rel="noopener noreferrer" aria-label="WhatsApp" className="w-9 h-9 rounded-full bg-white/10 flex items-center justify-center hover:bg-white/20 transition-colors overflow-hidden">
+                    {socials.social_whatsapp_icon
+                      ? <img src={socials.social_whatsapp_icon} alt="WhatsApp" className="w-5 h-5 object-contain" />
+                      : <span className="text-[10px] font-bold">WA</span>
+                    }
                   </a>
                 )}
                 {socials.social_tiktok && (
-                  <a href={socials.social_tiktok} target="_blank" rel="noopener noreferrer" aria-label="TikTok" className="w-9 h-9 rounded-full bg-white/10 flex items-center justify-center hover:bg-white/20 transition-colors">
-                    <span className="text-[10px] font-bold">TT</span>
+                  <a href={socials.social_tiktok} target="_blank" rel="noopener noreferrer" aria-label="TikTok" className="w-9 h-9 rounded-full bg-white/10 flex items-center justify-center hover:bg-white/20 transition-colors overflow-hidden">
+                    {socials.social_tiktok_icon
+                      ? <img src={socials.social_tiktok_icon} alt="TikTok" className="w-5 h-5 object-contain" />
+                      : <span className="text-[10px] font-bold">TT</span>
+                    }
                   </a>
                 )}
               </div>
@@ -139,7 +159,7 @@ export default function Footer() {
           </div>
 
           <div className="border-t border-white/10 pt-6 flex flex-col md:flex-row items-center justify-between gap-3">
-            <p className="text-xs text-gray-500">© {new Date().getFullYear()} Satish Fragrances. All Rights Reserved.</p>
+            <p className="text-xs text-gray-500">© {new Date().getFullYear()} Sattis Fragrances. All Rights Reserved.</p>
             <div className="flex gap-4 text-xs text-gray-500">
               <Link to="/terms" className="hover:text-white transition-colors">Terms</Link>
               <Link to="/privacy" className="hover:text-white transition-colors">Privacy</Link>

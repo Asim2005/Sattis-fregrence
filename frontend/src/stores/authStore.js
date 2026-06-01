@@ -15,7 +15,7 @@ const useAuthStore = create(
         try {
           const res = await authAPI.login({ email, password });
           const { token, user } = res.data.data;
-          localStorage.setItem('satish_token', token);
+          localStorage.setItem('sattis_token', token);
           set({ user, token, isLoading: false });
           return { success: true };
         } catch (err) {
@@ -30,7 +30,7 @@ const useAuthStore = create(
         try {
           const res = await authAPI.register({ name, email, password });
           const { token, user } = res.data.data;
-          localStorage.setItem('satish_token', token);
+          localStorage.setItem('sattis_token', token);
           set({ user, token, isLoading: false });
           return { success: true };
         } catch (err) {
@@ -41,7 +41,7 @@ const useAuthStore = create(
       },
 
       logout: () => {
-        localStorage.removeItem('satish_token');
+        localStorage.removeItem('sattis_token');
         set({ user: null, token: null, error: null });
       },
 
@@ -50,7 +50,7 @@ const useAuthStore = create(
         return state.user?.role === 'admin';
       },
     }),
-    { name: 'satish_auth' }
+    { name: 'sattis_auth' }
   )
 );
 

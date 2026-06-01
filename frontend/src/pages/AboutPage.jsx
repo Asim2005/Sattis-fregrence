@@ -1,6 +1,12 @@
 import { motion } from 'framer-motion';
+import useSEO from '../hooks/useSEO';
 
 export default function AboutPage() {
+  useSEO({
+    title: 'About Sattis',
+    description: 'Sattis is a luxury Pakistani fragrance brand crafting premium perfumes for men, women, and unisex. Discover our story, values, and artisan approach to scent.',
+  });
+
   return (
     <div className="pt-24 min-h-screen bg-white">
       {/* Hero Header */}

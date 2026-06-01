@@ -2,8 +2,11 @@ import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import useWishlistStore from '../stores/wishlistStore';
 import ProductCard from '../components/ProductCard';
+import useSEO from '../hooks/useSEO';
 
 export default function WishlistPage() {
+  useSEO({ title: 'My Wishlist', noindex: true });
+
   const { items } = useWishlistStore();
 
   return (

@@ -1,4 +1,11 @@
+import useSEO from '../hooks/useSEO';
+
 export default function TermsPage() {
+  useSEO({
+    title: 'Terms & Conditions',
+    description: 'Read the Sattis terms and conditions governing the use of our website, purchases, and services.',
+  });
+
   return (
     <div className="pt-24 min-h-screen bg-white">
       <div className="bg-[#0a0a0a] text-white py-24 text-center">

@@ -4,13 +4,27 @@ import { motion } from 'framer-motion';
 // import { Filter, SlidersHorizontal } from 'lucide-react';
 import { productsAPI } from '../services/api';
 import ProductCard from '../components/ProductCard';
+import useSEO from '../hooks/useSEO';
+
+const CATEGORY_SEO = {
+  men:     { title: "Men's Fragrances",       description: "Shop the Sattis men's fragrance collection — bold, sophisticated, and long-lasting perfumes crafted for every occasion." },
+  women:   { title: "Women's Fragrances",     description: "Explore Sattis women's perfumes — elegant floral, oriental, and soft scents designed to captivate and inspire." },
+  unisex:  { title: "Unisex Fragrances",      description: "Discover Sattis unisex fragrances — versatile, modern scents that transcend gender boundaries." },
+  bundles: { title: "Fragrance Bundles & Gift Sets", description: "Explore Sattis curated fragrance bundles and gift sets — perfect for yourself or as a luxury gift." },
+};
 
 export default function ProductsPage() {
   const { category } = useParams();
   const [searchParams] = useSearchParams();
   const search = searchParams.get('search');
   const scent = searchParams.get('scent');
-  
+
+  const seo = CATEGORY_SEO[category] || {
+    title: search ? `Search: ${search}` : 'Shop All Fragrances',
+    description: 'Browse the complete Sattis collection of luxury perfumes and fragrances. Find your signature scent with COD delivery across Pakistan.',
+  };
+  useSEO(seo);
+
   const [products, setProducts] = useState([]);
   const [loading, setLoading]   = useState(true);
   const [showFilters, setShowFilters] = useState(false);

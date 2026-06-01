@@ -3,8 +3,14 @@ import { Link, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import useAuthStore from '../stores/authStore';
 import toast from 'react-hot-toast';
+import useSEO from '../hooks/useSEO';
 
 export default function RegisterPage() {
+  useSEO({
+    title: 'Create Account',
+    description: 'Join Sattis today and unlock exclusive offers, order tracking, and a personalised luxury fragrance experience.',
+  });
+
   const [formData, setFormData] = useState({ name: '', email: '', password: '' });
   const { register, isLoading } = useAuthStore();
   const navigate = useNavigate();

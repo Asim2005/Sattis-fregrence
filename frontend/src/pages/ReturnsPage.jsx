@@ -1,4 +1,11 @@
+import useSEO from '../hooks/useSEO';
+
 export default function ReturnsPage() {
+  useSEO({
+    title: 'Returns & Exchanges',
+    description: 'Read the Sattis returns and exchange policy. Learn how to return or exchange a product hassle-free.',
+  });
+
   return (
     <div className="pt-24 min-h-screen bg-white">
       <div className="bg-[#0a0a0a] text-white py-24 text-center">

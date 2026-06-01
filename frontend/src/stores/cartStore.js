@@ -43,7 +43,7 @@ const useCartStore = create(
       clearCart: () => set({ items: [] }),
     }),
     {
-      name: 'satish_cart_v4',
+      name: 'sattis_cart_v4',
       storage: createJSONStorage(() => localStorage),
       // Only save items array — keeps it clean, no hydration issues
       partialize: (state) => ({ items: state.items }),

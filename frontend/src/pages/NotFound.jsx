@@ -1,7 +1,10 @@
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
+import useSEO from '../hooks/useSEO';
 
 export default function NotFound() {
+  useSEO({ title: 'Page Not Found', noindex: true });
+
   return (
     <div className="min-h-screen flex items-center justify-center pt-16 px-4">
       <motion.div 

@@ -2,10 +2,16 @@ import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { settingsAPI, contactAPI } from '../services/api';
 import toast from 'react-hot-toast';
+import useSEO from '../hooks/useSEO';
 
 export default function ContactPage() {
+  useSEO({
+    title: 'Contact Us',
+    description: 'Get in touch with the Sattis team. We\'re here to help with orders, product questions, and anything else you need.',
+  });
+
   const [siteInfo, setSiteInfo] = useState({
-    support_email: 'support@satish.com',
+    support_email: 'support@sattis.com',
     phone_number: '+92 000 0000000',
     address: 'Karachi, Pakistan',
     social_facebook: '',

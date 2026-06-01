@@ -3,8 +3,11 @@ import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import useAuthStore from '../stores/authStore';
 import { ordersAPI } from '../services/api';
+import useSEO from '../hooks/useSEO';
 
 export default function AccountPage() {
+  useSEO({ title: 'My Account', noindex: true });
+
   const { user, logout } = useAuthStore();
   const navigate = useNavigate();
   const [orders, setOrders] = useState([]);

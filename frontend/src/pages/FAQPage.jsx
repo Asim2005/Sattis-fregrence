@@ -1,7 +1,13 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import useSEO from '../hooks/useSEO';
 
 export default function FAQPage() {
+  useSEO({
+    title: 'Frequently Asked Questions',
+    description: 'Find answers to common questions about Sattis orders, shipping, returns, payments, and our luxury fragrance products.',
+  });
+
   const [openIndex, setOpenIndex] = useState(null);
 
   const faqs = [

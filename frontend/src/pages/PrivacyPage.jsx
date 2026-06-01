@@ -1,4 +1,11 @@
+import useSEO from '../hooks/useSEO';
+
 export default function PrivacyPage() {
+  useSEO({
+    title: 'Privacy Policy',
+    description: 'Learn how Sattis collects, uses, and protects your personal data when you shop with us.',
+  });
+
   return (
     <div className="pt-24 min-h-screen bg-white">
       <div className="bg-[#0a0a0a] text-white py-24 text-center">
